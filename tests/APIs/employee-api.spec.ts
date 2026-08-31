@@ -6,24 +6,8 @@ test.use({ storageState: '.auth/user.json' });
 
 test.describe('Employee API', () => {
 
-    test('GET employee by Emp Number', async ({ request }) => {
-        const empNumber = 195;
 
-        const response = await request.get(
-            `https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees/${empNumber}`
-        );
-
-        expect(response.status()).toBe(200);
-
-        const body = await response.json();
-
-        console.log('GET employee:', body);
-
-        expect(body.data).toBeDefined();
-        expect(body.data.empNumber).toBe(empNumber);
-    });
-
-    test('Create a new employee', async ({ request }) => {
+    test('Create and get a new employee', async ({ request }) => {
         const employeeId = String(Date.now()).slice(-8);
 
         const newEmployeeData = {
@@ -82,8 +66,17 @@ test.describe('Employee API', () => {
         expect(pictureResponse.status()).toBe(200);
 
         const pictureBody = await pictureResponse.json();
-
         console.log('Employee picture uploaded successfully:', pictureBody);
-    });
 
+        const getResponse = await request.get(`https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees/${empNumber}`)
+        expect (getResponse.status()).toBe(200);
+
+        const getBody = await getResponse.json();
+        console.log('Get employee', getBody);
+
+        expect (getBody.data).toBeDefined();
+        expect (getBody.data.empNumber).toBe(empNumber);
+        expect (getBody.data.employeeId).toBe(employeeId);
+            
+    });
 });
