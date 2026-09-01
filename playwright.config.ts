@@ -27,13 +27,19 @@ export default defineConfig({
       testMatch: /.*\.setup\.ts/,
     },
     {
-  name: 'chromium',
+      name: 'API Tests',
       use: {
-        browserName: 'chromium',
-        // storageState: 'playwright/.auth/user.json',
-      },
-      dependencies: ['setup'], 
+        storageState: 'playwright/.auth/user.json',},
+        dependencies: ['setup'],
+
     },
+    // {
+  // name: 'chromium',
+  //     use: {
+  //       browserName: 'chromium',
+  //       // storageState: 'playwright/.auth/user.json',
+  //     },
+  //   },
 
     // {
     //   name: 'firefox',
