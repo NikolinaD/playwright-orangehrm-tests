@@ -1,6 +1,6 @@
 import { test as setup, expect } from '@playwright/test';
 
-const authFile = '.auth/user.json';
+const authFile = 'playwright/.auth/user.json';
 
 setup('authenticate', async ({ page }) => {
   await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
