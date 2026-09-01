@@ -8,6 +8,10 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+       ORANGEHRM_BASE_URL: ${{ secrets.ORANGEHRM_BASE_URL }}
+       ORANGEHRM_REDIRECT_URI: ${{ secrets.ORANGEHRM_REDIRECT_URI }}
+       ORANGEHRM_CLIENT_ID: ${{ secrets.ORANGEHRM_CLIENT_ID }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
