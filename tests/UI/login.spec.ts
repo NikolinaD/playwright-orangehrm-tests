@@ -4,6 +4,9 @@ import { LoginPage } from '../../pages/LoginPage';
 const VALID_USERNAME = 'Admin';
 const VALID_PASSWORD = 'admin123';
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
+
 test.describe('Login Tests', () => {
   let loginPage: LoginPage;
 

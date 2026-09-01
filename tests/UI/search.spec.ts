@@ -1,17 +1,13 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
 
 test.describe('Menu Search', () => {
-  let loginPage: LoginPage;
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login('Admin', 'admin123');
-
+         await page.goto(
+        'https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index'
+    );
   });
 
   test('Search by name', async ({ page }) => {
-    
     await expect(page).toHaveURL(/dashboard/);
     const menuSearch = page.getByPlaceholder('Search');
     await menuSearch.fill('Leave');
