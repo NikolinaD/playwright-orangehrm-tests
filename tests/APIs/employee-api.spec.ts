@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import path from 'path';
 import fs from 'fs';
 
-test.use({ storageState: '.auth/user.json' });
+test.use({ storageState: 'playwright/.auth/user.json' });
 
 test.describe('Employee API', () => {
 
