@@ -77,6 +77,54 @@ test.describe('Employee API', () => {
         expect (getBody.data).toBeDefined();
         expect (getBody.data.empNumber).toBe(empNumber);
         expect (getBody.data.employeeId).toBe(employeeId);
-            
+
+
+        //Update the employee
+        const updatedEmployeeData = {
+            lastName: 'JohnsonUpdated',
+            firstName: 'TestingUpdated',
+            middleName: 'SmithUpdated',
+        };
+         const updateResponse = await request.put(
+            `https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees/${empNumber}/personal-details`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    accept: 'application/json'
+                },
+                data: updatedEmployeeData
+            }
+        );
+
+        console.log('Update employee response:', updateResponse.status());
+        console.log('Update employee response body:', await updateResponse.text());
+        expect(updateResponse.status()).toBe(200);
+
+        const getUpdatedResponse = await request.get(`https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees/${empNumber}/personal-details`);
+        expect(getUpdatedResponse.status()).toBe(200);
+
+        const getUpdatedBody = await getUpdatedResponse.json();
+        console.log('Get updated employee', getUpdatedBody);
+
+        expect(getUpdatedBody.data.firstName).toBe('TestingUpdated');
+        expect(getUpdatedBody.data.lastName).toBe('JohnsonUpdated');
+        expect(getUpdatedBody.data.middleName).toBe('SmithUpdated');
+    
+
+        //Delete the employee
+        const deletedEmpployee = 
+        {
+           "ids": [empNumber]
+        }
+        const deleteResponse = await request.delete(`https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees`, {
+            headers: {
+                'Content-Type': 'application/json',
+                accept: 'application/json'
+            },
+            data: deletedEmpployee
+        });
+        expect(deleteResponse.status()).toBe(200);
+      
     });
+            
 });
