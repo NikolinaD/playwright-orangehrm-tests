@@ -60,6 +60,8 @@ export default defineConfig({
       testMatch: /.*\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
+            storageState: 'playwright/.auth/user.json',
+
       },
       dependencies: ['setup'],
     },
@@ -88,6 +90,8 @@ export default defineConfig({
       testMatch: /.*\.spec\.ts/,
       use: {
         ...devices['Desktop Safari'],
+            storageState: 'playwright/.auth/user.json',
+
       },
       dependencies: ['setup'],
     },
