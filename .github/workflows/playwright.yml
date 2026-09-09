@@ -56,25 +56,26 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Smoke tests
-        if: ${{ inputs.test_suite == 'Smoke' }}
-        run: npx playwright test --grep "@smoke" --project=${{ inputs.browser }}
-
-      - name: Run Regression tests
-        if: ${{ inputs.test_suite == 'Regression' }}
-        run: npx playwright test --grep "@regression" --project=${{ inputs.browser }}
-
       - name: Run API tests
         if: ${{ inputs.test_suite == 'API' }}
-        run: npx playwright test --grep "@api" --project=${{ inputs.browser }}
+        run: npx playwright test --grep "@api" --project="API Tests"
 
       - name: Run UI tests
         if: ${{ inputs.test_suite == 'UI' }}
-        run: npx playwright test --grep "@ui" --project=${{ inputs.browser }}
+        run: npx playwright test --grep "@ui" --project="${{ inputs.browser }}"
 
+      - name: Run Smoke tests
+        if: ${{ inputs.test_suite == 'Smoke' }}
+        run: npx playwright test --grep "@smoke" --project="${{ inputs.browser }}"
+
+      - name: Run Regression tests
+        if: ${{ inputs.test_suite == 'Regression' }}
+        run: npx playwright test --grep "@regression" --project="${{ inputs.browser }}"
+
+      
       - name: Run All tests
         if: ${{ inputs.test_suite == 'All' }}
-        run: npx playwright test --project=${{ inputs.browser }}
+        run: npx playwright test --project="${{ inputs.browser }}"
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
