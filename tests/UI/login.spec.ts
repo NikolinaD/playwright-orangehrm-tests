@@ -16,7 +16,7 @@ test.describe('Login Tests', () => {
   });
 
 
-  test('Valid login', async ({page}) => {
+  test('Valid login @UI @smoke', async ({page}) => {
     await loginPage.login(VALID_USERNAME, VALID_PASSWORD);
     await expect(page).toHaveURL('https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index');
     await expect(
@@ -24,24 +24,24 @@ test.describe('Login Tests', () => {
   });
 
 
-    test('Invalid login - empty username', async ({page}) => {
+    test('Invalid login - empty username @UI @smoke', async ({page}) => {
     await loginPage.login('', VALID_PASSWORD);
     await loginPage.loginButton.click();
     await expect(loginPage.errorMessage).toHaveText('Required');
 });
 
-test('Invalid login - empty password', async ({page}) => {
+test('Invalid login - empty password @UI @smoke', async ({page}) => {
     await loginPage.login(VALID_USERNAME, '');
     await loginPage.loginButton.click();
     await expect(loginPage.errorMessage).toHaveText('Required');
   });
 
-  test ('Invalid login - incorrect username', async ({page}) => {
+  test ('Invalid login - incorrect username @UI @smoke', async ({page}) => {
     await loginPage.login('invalid_user', VALID_PASSWORD);
     await expect(loginPage.errorMessageText).toHaveText('Invalid credentials');
   });
 
-  test('Invalid login - incorrect password', async ({page}) => {
+  test('Invalid login - incorrect password @UI @smoke', async ({page}) => {
     await loginPage.login(VALID_USERNAME, 'invalid_password');
     await expect(loginPage.errorMessageText).toHaveText('Invalid credentials');
   });

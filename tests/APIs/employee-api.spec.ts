@@ -7,7 +7,7 @@ test.use({ storageState: 'playwright/.auth/user.json' });
 test.describe('Employee API', () => {
 
 
-    test('Create and get a new employee', async ({ request }) => {
+    test('Create and get a new employee @api @regression', async ({ request }) => {
         const employeeId = String(Date.now()).slice(-8);
 
         const newEmployeeData = {

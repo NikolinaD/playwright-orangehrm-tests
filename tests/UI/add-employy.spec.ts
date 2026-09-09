@@ -9,7 +9,7 @@ test.describe('Add Employee', () => {
     
     });
 
-    test('Add Employee', async ({ page }) => {
+    test('Add Employee @UI @regression', async ({ page }) => {
         const addEmployeePage = new AddEmployeePage(page);
         const dynamicEmployeeId = Math.floor(10000 + Math.random() * 90000).toString(); 
         await page.getByRole('link', { name: 'PIM' }).click();
