@@ -73,6 +73,8 @@ export default defineConfig({
       testMatch: /.*\.spec\.ts/,
       use: {
         ...devices['Desktop Firefox'],
+            storageState: 'playwright/.auth/user.json',
+
       },
       dependencies: ['setup'],
     },
