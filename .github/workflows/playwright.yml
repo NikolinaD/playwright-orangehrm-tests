@@ -1,32 +1,85 @@
 name: Playwright Tests
+
 on:
   workflow_dispatch:
+    inputs:
+      test_suite:
+        description: 'Choose test suite'
+        required: true
+        type: choice
+        options:
+          - Smoke
+          - Regression
+          - API
+          - UI
+          - All
+        default: Smoke
+
+      browser:
+        description: 'Choose browser'
+        required: true
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+        default: chromium
+
   push:
     branches: [main]
+
   pull_request:
     branches: [main]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     env:
-       ORANGEHRM_BASE_URL: ${{ secrets.ORANGEHRM_BASE_URL }}
-       ORANGEHRM_REDIRECT_URI: ${{ secrets.ORANGEHRM_REDIRECT_URI }}
-       ORANGEHRM_CLIENT_ID: ${{ secrets.ORANGEHRM_CLIENT_ID }}
+      ORANGEHRM_BASE_URL: ${{ secrets.ORANGEHRM_BASE_URL }}
+      ORANGEHRM_REDIRECT_URI: ${{ secrets.ORANGEHRM_REDIRECT_URI }}
+      ORANGEHRM_CLIENT_ID: ${{ secrets.ORANGEHRM_CLIENT_ID }}
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Smoke tests
+        if: ${{ inputs.test_suite == 'Smoke' }}
+        run: npx playwright test --grep "@smoke" --project=${{ inputs.browser }}
+
+      - name: Run Regression tests
+        if: ${{ inputs.test_suite == 'Regression' }}
+        run: npx playwright test --grep "@regression" --project=${{ inputs.browser }}
+
+      - name: Run API tests
+        if: ${{ inputs.test_suite == 'API' }}
+        run: npx playwright test --grep "@api" --project=${{ inputs.browser }}
+
+      - name: Run UI tests
+        if: ${{ inputs.test_suite == 'UI' }}
+        run: npx playwright test --grep "@ui" --project=${{ inputs.browser }}
+
+      - name: Run All tests
+        if: ${{ inputs.test_suite == 'All' }}
+        run: npx playwright test --project=${{ inputs.browser }}
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
