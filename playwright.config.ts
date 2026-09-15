@@ -21,10 +21,7 @@ export default defineConfig({
   ],
 
   use: {
-<<<<<<< HEAD
     screenshot: 'only-on-failure',
-=======
->>>>>>> 8d0b289d254183ed02a551f0af049374ef2b7b34
     trace: 'on-first-retry' ,
   },
 
@@ -64,7 +61,6 @@ export default defineConfig({
       testMatch: /.*\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
-<<<<<<< HEAD
       },
       dependencies: ['setup'],
     },
@@ -78,33 +74,11 @@ export default defineConfig({
       testMatch: /.*\.spec\.ts/,
       use: {
         ...devices['Desktop Firefox'],
-=======
-            storageState: 'playwright/.auth/user.json',
-
->>>>>>> 8d0b289d254183ed02a551f0af049374ef2b7b34
       },
       dependencies: ['setup'],
     },
 
     /*
-<<<<<<< HEAD
-=======
-     * UI Tests - Firefox
-     */
-    {
-      name: 'firefox',
-      testDir: './tests/UI',
-      testMatch: /.*\.spec\.ts/,
-      use: {
-        ...devices['Desktop Firefox'],
-            storageState: 'playwright/.auth/user.json',
-
-      },
-      dependencies: ['setup'],
-    },
-
-    /*
->>>>>>> 8d0b289d254183ed02a551f0af049374ef2b7b34
      * UI Tests - WebKit
      */
     {
@@ -113,11 +87,6 @@ export default defineConfig({
       testMatch: /.*\.spec\.ts/,
       use: {
         ...devices['Desktop Safari'],
-<<<<<<< HEAD
-=======
-            storageState: 'playwright/.auth/user.json',
-
->>>>>>> 8d0b289d254183ed02a551f0af049374ef2b7b34
       },
       dependencies: ['setup'],
     },
