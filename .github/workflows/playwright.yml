@@ -25,6 +25,12 @@ on:
           - webkit
         default: chromium
 
+      test_name:
+          description: 'Test name to run (leave empty to run the selected suite)'
+          required: false
+          type: string
+          default: ''
+
   push:
     branches: [main]
 
