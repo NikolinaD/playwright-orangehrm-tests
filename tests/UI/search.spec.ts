@@ -7,7 +7,7 @@ test.describe('Menu Search', () => {
     );
   });
 
-  test('Search by name @UI @smoke', async ({ page }) => {
+  test('Search by name', async ({ page }) => {
     await expect(page).toHaveURL(/dashboard/);
     const menuSearch = page.getByPlaceholder('Search');
     await menuSearch.fill('Leave');
@@ -16,7 +16,7 @@ test.describe('Menu Search', () => {
     ).toHaveText('Leave');
   });
 
-    test('Search by name and click @UI @regression', async ({ page }) => {
+    test('Search by name and click', async ({ page }) => {
     
     await expect(page).toHaveURL(/dashboard/);
     const menuSearch = page.getByPlaceholder('Search');
