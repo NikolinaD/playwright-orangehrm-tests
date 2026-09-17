@@ -1,5 +1,7 @@
 name: OrangeHRM Automated Tests
 
+run-name: "Run ${{ inputs.test_suite }} tests on ${{ inputs.environment }} — by @${{ github.actor }}"
+
 on:
   workflow_dispatch:
     inputs:
