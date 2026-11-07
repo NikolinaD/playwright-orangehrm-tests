@@ -19,9 +19,12 @@ export default defineConfig({
       },
     ],
   ],
+ 
+  outputDir: 'test-results',
+
 
   use: {
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
     trace: 'on-first-retry' ,
   },
 
